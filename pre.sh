@@ -24,6 +24,11 @@ docker images|grep $registry_image_name || docker load -i ../offline-images/regi
 
 mkdir -p ../offline-registry_data
 
+# 安装rhsm redhat-uep.pem, 解决pull radhat 镜像问题
+wget http://${CONFIGSERVER_IP}:${CONFIGSERVER_PORT}/packages/centos/base/x86_64/RPMS/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv --to-stdout ./etc/rhsm/ca/redhat-uep.pem > /etc/rhsm/ca/redhat-uep.pem
+rm -f python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+
 docker stop offline-registry || echo
 docker rm offline-registry || echo
 docker run -d --name offline-registry \
@@ -37,7 +42,3 @@ docker run -d --name offline-registry \
 
 
 
-# 安装rhsm redhat-uep.pem, 解决pull radhat 镜像问题
-wget http://${CONFIGSERVER_IP}:${CONFIGSERVER_PORT}/packages/centos/base/RPMS/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
-rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv --to-stdout ./etc/rhsm/ca/redhat-uep.pem > /etc/rhsm/ca/redhat-uep.pem
-rm -f python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm

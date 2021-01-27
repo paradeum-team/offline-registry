@@ -4,7 +4,7 @@ After=docker.service
 
 [Service]
 Restart=always
-ExecStartPre=/data/offline-openshift-origin/offline-registry/pre.sh
+ExecStartPre=/home/banana/offline-registry/pre.sh
 ExecStart=/usr/bin/docker start -a offline-registry
 ExecStop=/usr/bin/docker stop -t 2 offline-registry
 

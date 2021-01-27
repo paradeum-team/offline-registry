@@ -3,8 +3,8 @@ set -e
 BASE_DIR=$(cd `dirname $0` && pwd)
 CONFIG_DIR="config/registry"
 cd $BASE_DIR
-if [  -f "../offline-okd/config.cfg" ];then
-	. ../offline-okd/config.cfg
+if [  -f "../offline-k8s/config.cfg" ];then
+	. ../offline-k8s/config.cfg
 elif [ -f "../config.cfg" ];then
         . ../config.cfg
 elif [ -f "./config.cfg" ];then
@@ -25,7 +25,7 @@ docker images|grep $registry_image_name || docker load -i ../offline-images/regi
 mkdir -p ../offline-registry_data
 
 # 安装rhsm redhat-uep.pem, 解决pull radhat 镜像问题
-wget http://${CONFIGSERVER_IP}:${CONFIGSERVER_PORT}/packages/centos/base/x86_64/RPMS/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+wget http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
 rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv --to-stdout ./etc/rhsm/ca/redhat-uep.pem > /etc/rhsm/ca/redhat-uep.pem
 rm -f python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
 
@@ -35,8 +35,8 @@ docker run -d --name offline-registry \
                         --privileged --restart=always \
                         --log-driver journald \
                         --net host \
-                        -v /data/offline-openshift-origin/offline-registry_data:/var/lib/registry \
-                        -v /data/offline-openshift-origin/offline-registry/config/registry:/etc/registry \
+                        -v /home/banana/offline-registry_data:/var/lib/registry \
+                        -v /home/banana/offline-registry/config/registry:/etc/registry \
                         -e GODEBUG=netdns=cgo \
                         $registry_image_name serve /etc/registry/config.yml
 

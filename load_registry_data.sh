@@ -6,8 +6,8 @@ set -e
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
 
-if [  -f "../offline-okd/config.cfg" ];then
-        . ../offline-okd/config.cfg
+if [  -f "../offline-k8s/config.cfg" ];then
+        . ../offline-k8s/config.cfg
 elif [ -f "../config.cfg" ];then
         . ../config.cfg
 else
@@ -33,7 +33,7 @@ if [ -z "$images" ];then
 	images=`./print_json_value.py`
 fi
 
-offline_registry="offlineregistry.offline-okd.com:5000"
+offline_registry="offlineregistry.offline-k8s.com:5000"
 
 mkdir -p ../offline-registry_data
 mkdir -p ../offline-images

@@ -8,8 +8,8 @@ BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
 
 
-if [ -f "../offline-k8s/config.cfg" ]; then
-        . ../offline-k8s/config.cfg
+if [ -f "../config/config.cfg" ]; then
+        . ../config/config.cfg
 elif [ -f "../config.cfg" ];then
         . ../config.cfg
 else
@@ -29,7 +29,7 @@ fi
 #	online_registry="registry.docker-cn.com"
 #fi
 	
-offline_registry="offlineregistry.offline-k8s.com:5000"
+offline_registry=$TARGET_REGISTRY
 
 images=$3
 
@@ -61,7 +61,7 @@ wait
 
 
 save_registry_image(){
-	ls ../offline-images/registry.tar.gz ||	docker save $online_registry/library/centos7-docker-registry:v2.5.0.2016090301|gzip > ../offline-images/registry.tar.gz && echo "save registry images to successful."
+	ls ../offline-registry-images/registry.tar.gz ||	docker save $online_registry/library/centos7-docker-registry:v2.5.0.2016090301|gzip > ../offline-images/registry.tar.gz && echo "save registry images to successful."
 }
 
 save_registry_image

@@ -1,8 +1,21 @@
 #!/bin/bash
+set -e 
+
+BASE_DIR=$(cd `dirname $0` && pwd)
+cd $BASE_DIR
+
+if [ -f "../config/config.cfg" ]; then
+        . ../config/config.cfg
+elif [ -f "../config.cfg" ];then
+        . ../config.cfg
+else
+	. ./config.cfg
+fi
 
 file=${1:-"images.properties"}
 
-target_registry="offlineregistry.offline-k8s.com:5000"
+
+target_registry=$TARGET_REGISTRY
 
 
 load_imamge(){

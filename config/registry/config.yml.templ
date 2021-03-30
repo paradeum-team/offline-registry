@@ -6,8 +6,8 @@ storage:
     rootdirectory: /var/lib/registry
     maxthreads: 100
 http:
-    addr: --registry_ip--:5000
+    addr: --registry_ip--:--port--
     secret: placeholder
     tls:
-      certificate: /etc/registry/ssl/offlineregistry.offline-k8s.com.crt
-      key: /etc/registry/ssl/offlineregistry.offline-k8s.com.key
+      certificate: /etc/registry/ssl/--project--.crt
+      key: /etc/registry/ssl/--project--.key

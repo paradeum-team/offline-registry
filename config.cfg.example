@@ -1,2 +1,7 @@
 # local ip
 export LOCAL_IP=192.168.1.214
+# target_registry
+TARGET_REGISTRY="offlineregistry.offline-kont.com:5000"  ## Need to check
+# port
+PORT="5000"   ## Need to check
+

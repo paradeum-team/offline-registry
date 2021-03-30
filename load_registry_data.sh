@@ -6,8 +6,8 @@ set -e
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
 
-if [  -f "../offline-k8s/config.cfg" ];then
-        . ../offline-k8s/config.cfg
+if [  -f "../config/config.cfg" ];then
+        . ../config/config.cfg
 elif [ -f "../config.cfg" ];then
         . ../config.cfg
 else
@@ -33,7 +33,7 @@ if [ -z "$images" ];then
 	images=`./print_json_value.py`
 fi
 
-offline_registry="offlineregistry.offline-k8s.com:5000"
+offline_registry=$TARGET_REGISTRY
 
 mkdir -p ../offline-registry_data
 mkdir -p ../offline-images
@@ -66,7 +66,7 @@ load_offlineregistry(){
 }
 
 save_registry_image(){
-	ls ../offline-images/registry.tar.gz ||	docker save $online_registry/library/centos7-docker-registry:v2.5.0.2016090301|gzip > ../offline-images/registry.tar.gz || echo "save registry images to fail."
+	ls ../offline-registry-images/registry.tar.gz ||	docker save $online_registry/library/centos7-docker-registry:v2.5.0.2016090301|gzip > ../offline-images/registry.tar.gz || echo "save registry images to fail."
 }
 
 main(){

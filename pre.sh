@@ -25,6 +25,10 @@ registry_image_name=docker.io/library/registry:2.7
 if [ -f $CONFIG_DIR/config.yml ];then
 	rm -rf $CONFIG_DIR/config.yml
 fi
+
+#创建证书
+./mkcsr.sh
+
 cp $CONFIG_DIR/config.yml.templ $CONFIG_DIR/config.yml && \
 sed -i 's/--registry_ip--/'$LOCAL_IP'/g' $CONFIG_DIR/config.yml && \
 sed -i 's/--port--/'$PORT'/g' $CONFIG_DIR/config.yml && \

@@ -19,4 +19,5 @@ EOF`
 
 - 执行./enable.sh，启动本地registry  
 - 编辑项目所需的imagelist，修改load_all_image.sh中的imagelist路径  
-- 执行./load_all_image.sh 从线上pull镜像，再push到本地镜像仓库  
+- 执行./load_all_image.sh 从线上pull镜像，再push到本地镜像仓库   
+  注：若从线上pull镜像时，需要用到私有仓库，load_all_image.sh的用法为./load_all_image.sh true user password registryname

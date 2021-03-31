@@ -21,10 +21,10 @@ IMAGELIST_DIR="../offline-imagelist"
 
 echo "all images download is starting..."
 
-#for file in `ls $IMAGELIST_DIR`;
-#do
-#	filedir="$IMAGELIST_DIR/$file"
-#	./loadimage.sh $filedir
-#done
+for file in `ls $IMAGELIST_DIR`;
+do
+	filedir="$IMAGELIST_DIR/$file"
+	./loadimage.sh $filedir
+done
 
 

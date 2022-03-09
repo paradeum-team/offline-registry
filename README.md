@@ -1,7 +1,8 @@
 # offline-registry
 offline-registry
 
-##  创建线下源   
+##  创建线下源  
+注：线下源目前仅支持x86 
 
 - 复制config.cfg.example 为config.cfg   
 `cp config.cfg.example config.cfg`
@@ -14,6 +15,9 @@ offline-registry
   "insecure-registries":["offlineregistry.offline-k8s.com:5000"]
 }
 EOF`  
+修改配置后需要重启下docker  
+`systemctl restart docker`
+
 - 增加域名解析    
 `ip offlineregistry.offline-k8s.com`   
 

@@ -32,7 +32,7 @@ fi
 cp $CONFIG_DIR/config.yml.templ $CONFIG_DIR/config.yml && \
 sed -i 's/--registry_ip--/'$LOCAL_IP'/g' $CONFIG_DIR/config.yml && \
 sed -i 's/--port--/'$PORT'/g' $CONFIG_DIR/config.yml && \
-docker images|grep $registry_image_name || docker load -i ../offline-registry-image/registry.tar.gz 
+docker images|grep $registry_image_name || docker load -i ./offline-registry-image/registry.tar.gz 
 
 mkdir -p ../offline-registry_data
 
